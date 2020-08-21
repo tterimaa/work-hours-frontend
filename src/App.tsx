@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { Register } from "./components/Register";
 
-function App() {
+type Role = "employee" | "employer";
+
+const App = () => {
+  const [role, setRole] = useState<Role>("employee");
+
+  const changeRole = () => {
+    if(role === "employee") setRole("employer");
+    else setRole("employee");
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button
+        name="role"
+        type="button"
+        onClick={changeRole}
+      >{role}</button>
+      <Register></Register>
     </div>
   );
-}
+};
 
 export default App;

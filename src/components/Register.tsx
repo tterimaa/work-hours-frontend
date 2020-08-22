@@ -1,18 +1,22 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { TextInput } from "./FormFields";
+import { TextInput } from "./TextInput";
 
-export const Register: React.FC = () => {
+interface RegisterProps {
+  userRole: string;
+}
+
+export const Register: React.FC<RegisterProps> = ({ userRole }) => {
   return (
     <>
-      <h1>Register employee</h1>
+      <h1>Register {userRole}</h1>
       <Formik
         initialValues={{
           email: "",
           firstName: "",
           lastName: "",
-          role: "employee",
+          role: userRole,
         }}
         validationSchema={Yup.object({
           firstName: Yup.string()
@@ -33,24 +37,44 @@ export const Register: React.FC = () => {
         }}
       >
         <Form>
-          <TextInput
-            label="First Name"
-            name="firstName"
-            type="text"
-            placeholder="Firstname"
-          ></TextInput>
-          <TextInput
-            label="Last Name"
-            name="lastName"
-            type="text"
-            placeholder="Lastname"
-          ></TextInput>
-          <TextInput
+        <TextInput
             label="Email Address"
             name="email"
             type="email"
             placeholder="example@email.com"
           ></TextInput>
+          <TextInput
+          label="Password"
+          name="password"
+          type="text"
+          placeholder="password"
+        ></TextInput>
+          {userRole === "employee" && (
+            <>
+              <TextInput
+                label="First Name"
+                name="firstname"
+                type="text"
+                placeholder="Firstname"
+              ></TextInput>
+              <TextInput
+                label="Last Name"
+                name="lastname"
+                type="text"
+                placeholder="Lastname"
+              ></TextInput>
+            </>
+          )}
+          {userRole === "employer" && (
+            <>
+              <TextInput
+                label="Company name"
+                name="companyName"
+                type="text"
+                placeholder="Company name"
+              ></TextInput>
+            </>
+          )}
           <button type="submit">Submit</button>
         </Form>
       </Formik>

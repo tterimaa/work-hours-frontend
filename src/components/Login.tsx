@@ -2,9 +2,9 @@ import React, { Dispatch, SetStateAction } from "react";
 import { TextInput } from "./TextInput";
 import { Formik, Form } from "formik";
 import { Button, Header, Grid, Segment, Message } from "semantic-ui-react";
-import { Link } from 'react-router-dom';
 import * as Yup from "yup";
 import authService from "../services/auth";
+import { SignUpModal } from "./SignUpModal";
 
 interface credentials {
     email: string,
@@ -74,7 +74,7 @@ export const Login = ({ setUser }: loginHandler) => {
           </Form>
         </Formik>
         <Message>
-          New to us? <Link to="/sign-up/employee">Sign Up</Link>
+          New to us? <SignUpModal></SignUpModal>
         </Message>
       </Grid.Column>
     </Grid>

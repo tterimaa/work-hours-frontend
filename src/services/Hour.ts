@@ -4,4 +4,4 @@ const setToken = (newToken: string) => {
     token = `Bearer ${newToken}`
 }
 
-export { setToken };
+export default { setToken };

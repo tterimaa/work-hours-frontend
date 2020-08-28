@@ -26,7 +26,9 @@ const register = (user: IEmployee | ICompany, role: role) => {
 };
 
 const login = async (user: IUser) => {
-    const response = await axios.post(API_URL + `users/login`, user);
+    const response = await axios.post(API_URL + `users/login`, user).catch(error => {
+        throw new Error(error)
+    });
     return response.data;
 }
 
@@ -35,4 +37,4 @@ const logout = () => {
     window.location.reload();
 }
 
-export { register, login, logout };
+export default { register, login, logout };

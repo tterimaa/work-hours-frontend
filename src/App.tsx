@@ -3,8 +3,8 @@ import { Login } from "./components/Login";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { Divider, Header, Container, Menu } from "semantic-ui-react";
-import * as hourService from "./services/Hour";
-import * as authService from "./services/auth";
+import hourService from "./services/Hour";
+import authService from "./services/auth";
 
 const App = () => {
   const [activeItem, setactiveItem] = useState<string>("");

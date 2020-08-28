@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { TextInput } from "./TextInput";
 import { Link } from "react-router-dom";
 import { Button, Header, Grid, Segment, Message } from "semantic-ui-react";
-import * as authService from "../services/auth";
+import authService from "../services/auth";
 
 type role = "employee" | "company";
 

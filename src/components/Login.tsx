@@ -4,7 +4,7 @@ import { Formik, Form } from "formik";
 import { Button, Header, Grid, Segment, Message } from "semantic-ui-react";
 import { Link } from 'react-router-dom';
 import * as Yup from "yup";
-import * as authService from "../services/auth";
+import authService from "../services/auth";
 
 interface credentials {
     email: string,
@@ -42,8 +42,10 @@ export const Login = ({ setUser }: loginHandler) => {
               .min(8, "Password is too short - should be 8 chars minimum."),
           })}
           onSubmit={async(values, { setSubmitting }) => {
-            const response = await authService.login(values)
-            .catch(error => console.error(error));
+            const response = await authService.login(values).catch(error => {
+                console.error(error);
+                throw new Error(error);
+            });
             window.localStorage.setItem('loggedUser', JSON.stringify(response))
             setUser(response.token);
 

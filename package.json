@@ -11,6 +11,7 @@
     "@types/react": "^16.9.46",
     "@types/react-dom": "^16.9.8",
     "@types/yup": "^0.29.6",
+    "axios": "^0.20.0",
     "formik": "^2.1.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -22,7 +23,7 @@
     "yup": "^0.29.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=3003 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

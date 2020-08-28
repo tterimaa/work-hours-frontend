@@ -4,12 +4,38 @@ import * as Yup from "yup";
 import { TextInput } from "./TextInput";
 import { Link } from "react-router-dom";
 import { Button, Header, Grid, Segment, Message } from "semantic-ui-react";
+import * as authService from "../services/auth";
+
+type role = "employee" | "company";
+
+type initialValues = Record<role, IEmployee | ICompany>;
+
+interface IEmployee {
+  email: string;
+  password: string;
+  firstame?: string;
+  lastname?: string;
+}
+
+interface ICompany {
+  email: string;
+  password: string;
+  companyName?: string;
+}
 
 interface RegisterProps {
-  userRole: string;
+  userRole: role;
 }
 
 export const Register: React.FC<RegisterProps> = ({ userRole }) => {
+  const values: initialValues = {
+    employee: { email: "", password: "", firstame: "", lastname: "" },
+    company: {
+      email: "",
+      password: "",
+      companyName: "",
+    },
+  };
   return (
     <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
@@ -17,12 +43,7 @@ export const Register: React.FC<RegisterProps> = ({ userRole }) => {
           Register {userRole}
         </Header>
         <Formik
-          initialValues={{
-            email: "",
-            firstName: "",
-            lastName: "",
-            role: userRole,
-          }}
+          initialValues={values[userRole]}
           validationSchema={Yup.object({
             email: Yup.string()
               .email("Invalid email address")
@@ -31,11 +52,13 @@ export const Register: React.FC<RegisterProps> = ({ userRole }) => {
               .required("No password provided.")
               .min(8, "Password is too short - should be 8 chars minimum."),
           })}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-            }, 400);
+          onSubmit={async (values, { setSubmitting }) => {
+            const response = await authService
+              .register(values, userRole)
+              .catch((error) => console.error(error));
+
+            console.log(response);
+            setSubmitting(false);
           }}
         >
           <Form className="form ui">
@@ -68,7 +91,7 @@ export const Register: React.FC<RegisterProps> = ({ userRole }) => {
                   ></TextInput>
                 </>
               )}
-              {userRole === "employer" && (
+              {userRole === "company" && (
                 <>
                   <TextInput
                     name="companyName"

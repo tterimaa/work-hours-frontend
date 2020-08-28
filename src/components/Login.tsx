@@ -1,11 +1,27 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { TextInput } from "./TextInput";
 import { Formik, Form } from "formik";
 import { Button, Header, Grid, Segment, Message } from "semantic-ui-react";
 import { Link } from 'react-router-dom';
 import * as Yup from "yup";
+import * as authService from "../services/auth";
 
-export const Login = () => {
+interface credentials {
+    email: string,
+    password: string,
+}
+
+interface res {
+    success: string,
+    token: string,
+    expires: string,
+}
+
+interface loginHandler {
+    setUser: Dispatch<SetStateAction<null>>
+}
+
+export const Login = ({ setUser }: loginHandler) => {
   return (
     <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
@@ -25,11 +41,14 @@ export const Login = () => {
               .required("No password provided.")
               .min(8, "Password is too short - should be 8 chars minimum."),
           })}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-            }, 400);
+          onSubmit={async(values, { setSubmitting }) => {
+            const response = await authService.login(values)
+            .catch(error => console.error(error));
+            window.localStorage.setItem('loggedUser', JSON.stringify(response))
+            setUser(response.token);
+
+            console.log(response);
+            setSubmitting(false);
           }}
         >
           <Form className="form ui">

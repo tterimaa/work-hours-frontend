@@ -1,18 +1,41 @@
-import React, { useState } from "react";
 import { Register } from "./components/Register";
 import { Login } from "./components/Login";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { Divider, Header, Container, Menu } from "semantic-ui-react";
+import * as hourService from "./services/Hour";
+import * as authService from "./services/auth";
 
 const App = () => {
   const [activeItem, setactiveItem] = useState<string>("");
   const handleItemClick = (name: string) => setactiveItem(name);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const loggedUser = window.localStorage.getItem("loggedUser");
+    if (loggedUser) {
+      const user = JSON.parse(loggedUser);
+      setUser(user);
+      hourService.setToken(user.token);
+      console.log(`User is logged in: ${loggedUser}`);
+    }
+  }, []);
+
   return (
     <div className="App">
       <Router>
         <Container text>
           <Header as="h1">Work Hours App</Header>
           <Menu>
+            <Menu.Item
+              as={Link}
+              to="/"
+              name="home"
+              active={activeItem === "home"}
+              onClick={() => handleItemClick("home")}
+            >
+              Home
+            </Menu.Item>
             <Menu.Item
               as={Link}
               to="/login"
@@ -36,13 +59,20 @@ const App = () => {
               active={activeItem === "sign-employer"}
               onClick={() => handleItemClick("sign-employer")}
             ></Menu.Item>
+            {user && (
+              <Menu.Item
+                name="logout"
+                onClick={() => authService.logout()}
+              ></Menu.Item>
+            )}
           </Menu>
+          {user && <Header>You are currently logged in</Header>}
           <Divider hidden />
           <Switch>
-            <Route path="/login" render={() => <Login />} />
+            <Route path="/login" render={() => <Login setUser={setUser} />} />
             <Route
               path="/sign-up/employer"
-              render={() => <Register userRole="employer" />}
+              render={() => <Register userRole="company" />}
             />
             <Route
               path="/sign-up/employee"

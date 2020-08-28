@@ -2,6 +2,8 @@ import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { TextInput } from "./TextInput";
+import { Link } from "react-router-dom";
+import { Button, Header, Grid, Segment, Message } from "semantic-ui-react";
 
 interface RegisterProps {
   userRole: string;
@@ -9,75 +11,83 @@ interface RegisterProps {
 
 export const Register: React.FC<RegisterProps> = ({ userRole }) => {
   return (
-    <>
-      <h1>Register {userRole}</h1>
-      <Formik
-        initialValues={{
-          email: "",
-          firstName: "",
-          lastName: "",
-          role: userRole,
-        }}
-        validationSchema={Yup.object({
-          firstName: Yup.string()
-            .max(15, "Must be 15 characters or less")
-            .required("Required"),
-          lastName: Yup.string()
-            .max(20, "Must be 20 characters or less")
-            .required("Required"),
-          email: Yup.string()
-            .email("Invalid email address")
-            .required("Required"),
-        })}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
-        }}
-      >
-        <Form>
-        <TextInput
-            label="Email Address"
-            name="email"
-            type="email"
-            placeholder="example@email.com"
-          ></TextInput>
-          <TextInput
-          label="Password"
-          name="password"
-          type="text"
-          placeholder="password"
-        ></TextInput>
-          {userRole === "employee" && (
-            <>
+    <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
+      <Grid.Column style={{ maxWidth: 450 }}>
+        <Header as="h2" textAlign="center">
+          Register {userRole}
+        </Header>
+        <Formik
+          initialValues={{
+            email: "",
+            firstName: "",
+            lastName: "",
+            role: userRole,
+          }}
+          validationSchema={Yup.object({
+            email: Yup.string()
+              .email("Invalid email address")
+              .required("Required"),
+            password: Yup.string()
+              .required("No password provided.")
+              .min(8, "Password is too short - should be 8 chars minimum."),
+          })}
+          onSubmit={(values, { setSubmitting }) => {
+            setTimeout(() => {
+              alert(JSON.stringify(values, null, 2));
+              setSubmitting(false);
+            }, 400);
+          }}
+        >
+          <Form className="form ui">
+            <Segment stacked>
               <TextInput
-                label="First Name"
-                name="firstname"
-                type="text"
-                placeholder="Firstname"
+                name="email"
+                type="email"
+                placeholder="E-mail address"
+                icon="user"
               ></TextInput>
               <TextInput
-                label="Last Name"
-                name="lastname"
+                name="password"
                 type="text"
-                placeholder="Lastname"
+                placeholder="Password"
+                icon="lock"
               ></TextInput>
-            </>
-          )}
-          {userRole === "employer" && (
-            <>
-              <TextInput
-                label="Company name"
-                name="companyName"
-                type="text"
-                placeholder="Company name"
-              ></TextInput>
-            </>
-          )}
-          <button type="submit">Submit</button>
-        </Form>
-      </Formik>
-    </>
+              {userRole === "employee" && (
+                <>
+                  <TextInput
+                    name="firstname"
+                    type="text"
+                    placeholder="First name"
+                    icon="address card"
+                  ></TextInput>
+                  <TextInput
+                    name="lastname"
+                    type="text"
+                    placeholder="Last name"
+                    icon="address card"
+                  ></TextInput>
+                </>
+              )}
+              {userRole === "employer" && (
+                <>
+                  <TextInput
+                    name="companyName"
+                    type="text"
+                    placeholder="Company name"
+                    icon="address card"
+                  ></TextInput>
+                </>
+              )}
+              <Button color="teal" fluid size="large" type="submit">
+                Register
+              </Button>
+            </Segment>
+          </Form>
+        </Formik>
+        <Message>
+          Already have an account? <Link to="/login">Login here</Link>
+        </Message>
+      </Grid.Column>
+    </Grid>
   );
 };

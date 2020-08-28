@@ -10,7 +10,7 @@ const App = () => {
   return (
     <div className="App">
       <Router>
-        <Container textAlign="center">
+        <Container text>
           <Header as="h1">Work Hours App</Header>
           <Menu>
             <Menu.Item

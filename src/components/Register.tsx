@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { TextInput } from "./TextInput";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Button, Header, Grid, Segment, Message } from "semantic-ui-react";
 import authService from "../services/auth";
 
@@ -13,7 +13,7 @@ type initialValues = Record<role, IEmployee | ICompany>;
 interface IEmployee {
   email: string;
   password: string;
-  firstame?: string;
+  firstname?: string;
   lastname?: string;
 }
 
@@ -28,8 +28,9 @@ interface RegisterProps {
 }
 
 export const Register: React.FC<RegisterProps> = ({ userRole }) => {
+  const history = useHistory();
   const values: initialValues = {
-    employee: { email: "", password: "", firstame: "", lastname: "" },
+    employee: { email: "", password: "", firstname: "", lastname: "" },
     company: {
       email: "",
       password: "",
@@ -53,12 +54,13 @@ export const Register: React.FC<RegisterProps> = ({ userRole }) => {
               .min(8, "Password is too short - should be 8 chars minimum."),
           })}
           onSubmit={async (values, { setSubmitting }) => {
-            const response = await authService
-              .register(values, userRole)
-              .catch((error) => console.error(error));
-
-            console.log(response);
-            setSubmitting(false);
+            try {
+              await authService.register(values, userRole)
+              setSubmitting(false);
+              history.push("/login");
+            } catch (error) {
+              console.error('Registration failed ' + error);
+            };
           }}
         >
           <Form className="form ui">

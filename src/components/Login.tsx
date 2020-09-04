@@ -1,27 +1,16 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { useState, useEffect } from "react";
 import { TextInput } from "./TextInput";
 import { Formik, Form } from "formik";
 import { Button, Header, Grid, Segment, Message } from "semantic-ui-react";
 import * as Yup from "yup";
 import authService from "../services/auth";
 import { SignUpModal } from "./SignUpModal";
+import { Redirect, useHistory } from "react-router-dom";
 
-interface credentials {
-    email: string,
-    password: string,
-}
+export const Login = () => {
 
-interface res {
-    success: string,
-    token: string,
-    expires: string,
-}
+  const history = useHistory();
 
-interface loginHandler {
-    setUser: Dispatch<SetStateAction<null>>
-}
-
-export const Login = ({ setUser }: loginHandler) => {
   return (
     <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
@@ -47,10 +36,8 @@ export const Login = ({ setUser }: loginHandler) => {
                 throw new Error(error);
             });
             window.localStorage.setItem('loggedUser', JSON.stringify(response))
-            setUser(response.token);
-
-            console.log(response);
             setSubmitting(false);
+            history.push("/");
           }}
         >
           <Form className="form ui">

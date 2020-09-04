@@ -1,43 +1,26 @@
-import { Register } from "./components/Register";
-import { Login } from "./components/Login";
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import React from "react";
 import { Container } from "semantic-ui-react";
 import hourService from "./services/Hour";
+import { Header, Button } from "semantic-ui-react";
+import { Redirect, useHistory } from "react-router-dom";
 
 const App = () => {
-  const [user, setUser] = useState(null);
+  const history = useHistory();
+  const user = window.localStorage.getItem("loggedUser");
 
-  useEffect(() => {
-    const loggedUser = window.localStorage.getItem("loggedUser");
-    if (loggedUser) {
-      const user = JSON.parse(loggedUser);
-      setUser(user);
-      hourService.setToken(user.token);
-      console.log(`User is logged in: ${loggedUser}`);
-    }
-  }, []);
-
+  const logOut = () => {
+    window.localStorage.removeItem("loggedUser");
+    history.push("/login");
+  };
+  
   return (
     <div className="App">
-      <Router>
-        <Container text>
-          {!user && <Redirect to="/login"></Redirect>}
-          <Switch>
-            <Route path="/login" render={() => <Login setUser={setUser} />} />
-            <Route
-              path="/sign-up/employer"
-              render={() => <Register userRole="company" />}
-            />
-            <Route
-              path="/sign-up/employee"
-              render={() => <Register userRole="employee" />}
-            />
-          </Switch>
-        </Container>
-      </Router>
+      {user ? <Container text><h1>Hello this is front page</h1>
+            <Header>You are logged in</Header>
+            <Button onClick={logOut}>Log out</Button>
+      </Container> : <Redirect to="/login"></Redirect>}
     </div>
-  );
+  )
 };
 
 export default App;

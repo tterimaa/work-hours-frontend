@@ -3,12 +3,13 @@ import { TextInput } from "./TextInput";
 import { Formik, Form } from "formik";
 import { Button, Header, Grid, Segment, Message } from "semantic-ui-react";
 import * as Yup from "yup";
-import authService from "../services/auth";
 import { SignUpModal } from "./SignUpModal";
 import { useHistory } from "react-router-dom";
 import { AuthRoutes } from "../random/routes-auth";
+import { connect } from "react-redux";
+import { logIn } from "../store/actions/userActions";
 
-export const Login = () => {
+const Login = (props: any) => {
 
   const history = useHistory();
 
@@ -31,12 +32,9 @@ export const Login = () => {
               .required("No password provided.")
               .min(8, "Password is too short - should be 8 chars minimum."),
           })}
+
           onSubmit={async(values, { setSubmitting }) => {
-            const response = await authService.login(values).catch(error => {
-                console.error(error);
-                throw new Error(error);
-            });
-            window.localStorage.setItem('loggedUser', JSON.stringify(response))
+            await props.logIn(values);
             setSubmitting(false);
             history.push(AuthRoutes.dashboard);
           }}
@@ -68,3 +66,11 @@ export const Login = () => {
     </Grid>
   );
 };
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    logIn: (userInfo: any) => dispatch(logIn(userInfo))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Login);

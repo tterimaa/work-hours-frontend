@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { TextInput } from "./TextInput";
 import { Formik, Form } from "formik";
 import { Button, Header, Grid, Segment, Message } from "semantic-ui-react";
 import * as Yup from "yup";
 import authService from "../services/auth";
 import { SignUpModal } from "./SignUpModal";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { AuthRoutes } from "../random/routes-auth";
 
 export const Login = () => {
 
@@ -37,7 +38,7 @@ export const Login = () => {
             });
             window.localStorage.setItem('loggedUser', JSON.stringify(response))
             setSubmitting(false);
-            history.push("/");
+            history.push(AuthRoutes.dashboard);
           }}
         >
           <Form className="form ui">

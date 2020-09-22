@@ -27,7 +27,7 @@ interface RegisterProps {
   userRole: role;
 }
 
-export const Register: React.FC<RegisterProps> = ({ userRole }) => {
+export const Register = ({ userRole }: RegisterProps) => {
   const history = useHistory();
   const values: initialValues = {
     employee: { email: "", password: "", firstname: "", lastname: "" },

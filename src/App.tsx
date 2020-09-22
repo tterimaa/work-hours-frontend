@@ -3,7 +3,7 @@ import { Register } from "./components/Register";
 import Login from "./components/Login";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { AuthRoute } from "./components/AuthRoute";
-import { Dashboard } from "./components/Dashboard";
+import Dashboard from "./components/Dashboard";
 import { AuthRoutes, NonAuthRoutes } from "./random/routes-auth";
 
 const App = () => {

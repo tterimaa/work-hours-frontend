@@ -7,7 +7,7 @@ import { SignUpModal } from "./SignUpModal";
 import { useHistory } from "react-router-dom";
 import { AuthRoutes } from "../random/routes-auth";
 import { connect } from "react-redux";
-import { logIn } from "../store/actions/userActions";
+import { logIn } from "../store/actions/user-actions";
 
 const Login = (props: any) => {
 

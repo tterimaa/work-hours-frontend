@@ -3,11 +3,6 @@ import authService from "../../services/auth";
 export const LOG_IN = "LOG_IN";
 export const LOG_OUT = "LOG_out";
 
-interface LogInAction {
-    type: typeof LOG_IN,
-    payload: any,
-}
-
 const setUser = (payload: any) => ({ type: "SET_USER", payload});
 
 export const logOut = () => ({type: "LOG_OUT"});

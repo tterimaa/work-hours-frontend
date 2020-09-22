@@ -10,7 +10,7 @@ interface TextInputProps {
   icon?: string;
 }
 
-export const TextInput: React.FC<TextInputProps> = ({ label, ...props }) => {
+export const TextInput = ({ label, ...props }: TextInputProps) => {
   const [field, meta] = useField(props);
   return (
     <Form.Field>

@@ -2,7 +2,7 @@ import React from "react";
 import { RouteComponentProps, Route, Redirect } from "react-router-dom";
 import { NonAuthRoutes } from "../random/routes-auth";
 
-interface Props {
+interface AuthRouteProps {
   Component: React.FC<RouteComponentProps>;
   path: string;
   exact?: boolean;
@@ -12,7 +12,7 @@ export const AuthRoute = ({
   Component,
   path,
   exact = false,
-}: Props): JSX.Element => {
+}: AuthRouteProps) => {
   const isAuthed = !!localStorage.getItem("loggedUser");
   return (
     <Route

@@ -1,3 +1,4 @@
+import { UserActionTypes } from './types';
 import { DefaultState } from './types';
 
 const defaultState = {
@@ -5,7 +6,7 @@ const defaultState = {
     user: {},
 }
 
-const userReducer = (state = defaultState, action: any): DefaultState => {
+const userReducer = (state = defaultState, action: UserActionTypes): DefaultState => {
     switch(action.type) {
         case "SET_USER":
             return {

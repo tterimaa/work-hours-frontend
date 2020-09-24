@@ -5,23 +5,11 @@ import { TextInput } from "./TextInput";
 import { Link, useHistory } from "react-router-dom";
 import { Button, Header, Grid, Segment, Message } from "semantic-ui-react";
 import authService from "../services/auth";
+import { IEmployee, ICompany } from "../types";
 
 type role = "employee" | "company";
 
 type initialValues = Record<role, IEmployee | ICompany>;
-
-interface IEmployee {
-  email: string;
-  password: string;
-  firstname?: string;
-  lastname?: string;
-}
-
-interface ICompany {
-  email: string;
-  password: string;
-  companyName?: string;
-}
 
 interface RegisterProps {
   userRole: role;

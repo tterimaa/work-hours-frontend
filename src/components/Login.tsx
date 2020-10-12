@@ -6,11 +6,11 @@ import * as Yup from "yup";
 import { SignUpModal } from "./SignUpModal";
 import { useHistory } from "react-router-dom";
 import { AuthRoutes } from "../random/routes-auth";
-import { connect, ConnectedProps } from "react-redux";
+import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 import { logIn } from "../store/actions/user-actions";
-import { UserActionTypes } from "../store/types";
-import { DefaultState } from "../store/types";
+import { UserActionTypes } from "../store/actions/action-types";
+import { UserState } from "../store/reducers/user-reducer";
 
 const Login = (props: any) => {
 
@@ -70,7 +70,7 @@ const Login = (props: any) => {
   );
 };
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<DefaultState, void, UserActionTypes>) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<UserState, void, UserActionTypes>) => {
   return {
     logIn: (userInfo: any) => dispatch(logIn(userInfo))
   }

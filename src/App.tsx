@@ -1,21 +1,24 @@
 import React from "react";
 import { Register } from "./components/Register";
 import Login from "./components/Login";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import { AuthRoute } from "./components/AuthRoute";
-import Dashboard from "./components/Dashboard";
+import Home from "./components/Home";
 import { AuthRoutes, NonAuthRoutes } from "./random/routes-auth";
+import history from "./helpers/history";
 
 const Routes = () => {
   return (
     <Switch>
-      <AuthRoute exact path={AuthRoutes.dashboard} Component={Dashboard} />
+      <AuthRoute exact path={AuthRoutes.home} Component={Home} />
       <Route exact path={NonAuthRoutes.login} component={Login} />
       <Route
+        exact
         path={NonAuthRoutes.signUpCompany}
         render={() => <Register userRole="company" />}
       />
       <Route
+        exact
         path={NonAuthRoutes.signUpEmployee}
         render={() => <Register userRole="employee" />}
       />
@@ -25,7 +28,7 @@ const Routes = () => {
 
 const App = () => {
   return (
-    <Router>
+    <Router history={history}>
       <Routes />
     </Router>
   );

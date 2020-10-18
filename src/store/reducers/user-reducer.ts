@@ -1,20 +1,40 @@
 import { IToken } from "../../types";
 import { UserActionTypes } from "../actions/action-types";
 
+interface Account {
+  _id: string,
+  email: string,
+  role: string
+}
+
+interface Company {
+  employees: string[],
+  _id: string,
+  account: Account,
+  companyName: string,
+}
+
+interface Employee {
+  account: Account,
+  firstname?: string,
+  lastname?: string,
+  companies?: string[]   
+}
+
 export interface UserState {
   loggedIn: boolean;
   auth: IToken | null;
-  user: any;
+  user: Company | Employee | null;
 }
 
-const defaultState: UserState = {
+const initialState: UserState = {
   loggedIn: false,
   auth: null,
-  user: {},
+  user: null,
 };
 
 const userReducer = (
-  state = defaultState,
+  state = initialState,
   action: UserActionTypes
 ): UserState => {
   switch (action.type) {
@@ -29,7 +49,7 @@ const userReducer = (
       return {
         loggedIn: false,
         auth: null,
-        user: {},
+        user: null
       };
     case "SET_USER":
         return {

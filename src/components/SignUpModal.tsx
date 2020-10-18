@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Grid, Modal, Icon, Header } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import { NonAuthRoutes } from "../random/routes-auth";
 
 export const SignUpModal = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -24,10 +25,10 @@ export const SignUpModal = () => {
       <Modal.Content>
         <Grid columns="equal">
             <Grid.Column>
-                <Button as={Link} to="/sign-up/employee" inverted color="teal" fluid size="large">Employee</Button>
+                <Button as={Link} to={NonAuthRoutes.signUpEmployee} inverted color="teal" fluid size="large">Employee</Button>
             </Grid.Column>
             <Grid.Column>
-                <Button as={Link} to="/sign-up/company" inverted color="teal" fluid size="large">Company</Button>
+                <Button as={Link} to={NonAuthRoutes.signUpCompany} inverted color="teal" fluid size="large">Company</Button>
             </Grid.Column>
         </Grid>
       </Modal.Content>

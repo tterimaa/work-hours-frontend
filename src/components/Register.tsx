@@ -2,10 +2,11 @@ import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { TextInput } from "./TextInput";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button, Header, Grid, Segment, Message } from "semantic-ui-react";
-import authService from "../services/auth";
 import { IEmployee, ICompany } from "../types";
+import { useDispatch } from "react-redux";
+import { startRegistration } from "../store/actions/registration.actions";
 
 type role = "employee" | "company";
 
@@ -16,7 +17,7 @@ interface RegisterProps {
 }
 
 export const Register = ({ userRole }: RegisterProps) => {
-  const history = useHistory();
+  const dispatch = useDispatch();
   const values: initialValues = {
     employee: { email: "", password: "", firstname: "", lastname: "" },
     company: {
@@ -41,14 +42,9 @@ export const Register = ({ userRole }: RegisterProps) => {
               .required("No password provided.")
               .min(8, "Password is too short - should be 8 chars minimum."),
           })}
-          onSubmit={async (values, { setSubmitting }) => {
-            try {
-              await authService.register(values, userRole)
-              setSubmitting(false);
-              history.push("/login");
-            } catch (error) {
-              console.error('Registration failed ' + error);
-            };
+          onSubmit={(values, { setSubmitting }) => {
+            dispatch(startRegistration(values, userRole));
+            setSubmitting(false);
           }}
         >
           <Form className="form ui">

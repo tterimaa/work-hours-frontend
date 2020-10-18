@@ -28,16 +28,17 @@ const register = (user: IEmployee | ICompany, role: role) => {
   });
 };
 
-const login = async (user: IUser): Promise<LoginResponse> => {
+const logIn = async (user: IUser): Promise<LoginResponse> => {
     const response = await axios.post(API_URL + `users/login`, user).catch(error => {
         throw new Error(error)
     });
+    localStorage.setItem("loggedUser", JSON.stringify(response.data));
     return response.data;
 }
 
-const logout = () => {
-    window.localStorage.removeItem('loggedUser');
+const logOut = () => {
+    window.localStorage.removeItem("loggedUser");
     window.location.reload();
 }
 
-export default { register, login, logout };
+export default { register, logIn, logOut };

@@ -4,18 +4,11 @@ import { Formik, Form } from "formik";
 import { Button, Header, Grid, Segment, Message } from "semantic-ui-react";
 import * as Yup from "yup";
 import { SignUpModal } from "./SignUpModal";
-import { useHistory } from "react-router-dom";
-import { AuthRoutes } from "../random/routes-auth";
-import { connect } from "react-redux";
-import { ThunkDispatch } from "redux-thunk";
-import { logIn } from "../store/actions/user-actions";
-import { UserActionTypes } from "../store/actions/action-types";
-import { UserState } from "../store/reducers/user-reducer";
+import { useDispatch } from "react-redux";
+import { startLogIn } from "../store/actions/user-actions";
 
-const Login = (props: any) => {
-
-  const history = useHistory();
-
+const Login = () => {
+  const dispatch = useDispatch();
   return (
     <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
@@ -36,10 +29,9 @@ const Login = (props: any) => {
               .min(8, "Password is too short - should be 8 chars minimum."),
           })}
 
-          onSubmit={async(values, { setSubmitting }) => {
-            await props.logIn(values);
+          onSubmit={(values, { setSubmitting }) => {
+            dispatch(startLogIn(values));
             setSubmitting(false);
-            history.push(AuthRoutes.dashboard);
           }}
         >
           <Form className="form ui">
@@ -70,10 +62,4 @@ const Login = (props: any) => {
   );
 };
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<UserState, void, UserActionTypes>) => {
-  return {
-    logIn: (userInfo: any) => dispatch(logIn(userInfo))
-  }
-}
-
-export default connect(null, mapDispatchToProps)(Login);
+export default Login

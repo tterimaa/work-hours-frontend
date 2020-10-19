@@ -4,15 +4,17 @@ import authService from "../../services/auth";
 import { ICompany, IEmployee } from "../../types";
 import { AuthRoutes } from '../../random/routes-auth';
 
-const REG_REQ = "REGISTER_REQUEST";
-const REG_SUCCESS = "REGISTER_SUCCESS";
-const REG_FAILED = "REGISTER_FAILED";
+export const regActions = {
+    REG_REQ: "REGISTER_REQUEST",
+    REG_SUCCESS: "REGISTER_SUCCESS",
+    REG_FAILED: "REGISTER_FAILED"
+}
 
-const registrationStarted = () => ({ type: REG_REQ });
+const registrationStarted = () => ({ type: regActions.REG_REQ });
 
-const registrationSuccess = () => ({ type: REG_SUCCESS });
+const registrationSuccess = () => ({ type: regActions.REG_SUCCESS });
 
-const registrationFailed = () => ({ type: REG_FAILED });
+const registrationFailed = () => ({ type: regActions.REG_FAILED });
 
 export type RegistrationActionTypes = ReturnType<typeof registrationStarted> | ReturnType<typeof registrationSuccess> | ReturnType<typeof registrationFailed>;
 

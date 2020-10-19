@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "semantic-ui-react";
-import { logOut } from "../store/actions/user-actions";
+import { getUserDetails } from "../store/actions/user.actions";
+import { logOut } from "../store/actions/auth.actions"
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/index";
 import Employee from "./Employee";
@@ -8,15 +9,20 @@ import Company from "./Company";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const role = useSelector((state: RootState) => state.user.user?.account.role);
+  const role = useSelector((state: RootState) => state.user.account.role);
+  const token = useSelector((state: RootState) => state.auth.token);
 
-  const renderDashboard = (param: string | undefined) => {
+  useEffect(() => {
+    if(token) dispatch(getUserDetails(token))
+  }, [token, dispatch])
+
+  const renderDashboard = (param: string) => {
     switch(param) {
       case "employee":
-        return (<Employee />)
+        return <Employee />
       case "company": 
-        return (<Company />)
-      default: return (<div>Default</div>)
+        return <Company />
+      default: return <></>
     }
   }
   return (

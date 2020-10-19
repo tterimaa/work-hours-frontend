@@ -1,4 +1,4 @@
-import { RegistrationActionTypes } from './../actions/registration.actions';
+import { RegistrationActionTypes, regActions } from './../actions/registration.actions';
 
 export interface RegistrationState {
   registering: boolean;
@@ -13,11 +13,11 @@ const registrationReducer = (
   action: RegistrationActionTypes
 ): RegistrationState => {
   switch (action.type) {
-    case "REGISTER_REQUEST":
+    case regActions.REG_REQ:
       return { registering: true };
-    case "REGISTER_SUCCESS":
+    case regActions.REG_SUCCESS:
       return { registering: false };
-    case "REGISTER_FAILED":
+    case regActions.REG_FAILED:
       return { registering: false };
     default:
       return state;

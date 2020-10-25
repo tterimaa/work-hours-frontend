@@ -6,20 +6,20 @@ interface Account {
   role: string;
 }
 
-interface Company {
+interface CompanyDetails {
   account: Account;
   employees?: string[];
   companyName: string;
 }
 
-interface Employee {
+interface EmployeeDetails {
   account: Account;
   firstname?: string;
   lastname?: string;
   companies?: string[];
 }
 
-export type UserState = Employee | Company;
+export type UserState = EmployeeDetails | CompanyDetails;
 
 const initialState = {
   account: {

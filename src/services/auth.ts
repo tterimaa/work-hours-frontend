@@ -29,9 +29,7 @@ const register = (user: IEmployee | ICompany, role: role) => {
 };
 
 const logIn = async (user: IUser): Promise<LoginResponse> => {
-    const response = await axios.post(API_URL + `/users/login`, user).catch(error => {
-        throw new Error(error)
-    });
+    const response = await axios.post(API_URL + `/users/login`, user);
     localStorage.setItem("loggedUser", JSON.stringify(response.data));
     return response.data;
 }

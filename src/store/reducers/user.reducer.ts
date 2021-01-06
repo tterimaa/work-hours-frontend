@@ -1,3 +1,4 @@
+import { IEmployee } from './../../types';
 import { UserActionTypes, userActions } from "../actions/user.actions";
 
 interface Account {
@@ -6,13 +7,13 @@ interface Account {
   role: string;
 }
 
-interface CompanyDetails {
+export interface CompanyDetails {
   account: Account;
-  employees?: string[];
+  employees?: IEmployee[];
   companyName: string;
 }
 
-interface EmployeeDetails {
+export interface EmployeeDetails {
   account: Account;
   firstname?: string;
   lastname?: string;

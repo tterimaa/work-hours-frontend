@@ -20,9 +20,7 @@ export type AuthActionTypes =
   | ReturnType<typeof logOut>;
 
 export const startLogIn = (user: any) => async (dispatch: any) => {
-  const { token, expires } = await authService.logIn(user).catch((err) => {
-    throw new Error(err); // dispatch login failed?
-  });
+  const { token, expires } = await authService.logIn(user);
   dispatch(logIn({ token, expires }));
   history.push(AuthRoutes.home);
 };

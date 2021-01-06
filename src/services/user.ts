@@ -40,4 +40,18 @@ const sendRequest = async (token: string | null, toId: string) => {
   );
 };
 
-export default { getUserDetails, findUserByEmail, sendRequest };
+const getIncomingRequests = async (token: string | null, toId: string) => {
+  const res = await axios.get(API_URL + `/users/get-requests-to/${toId}`, {
+    headers: {
+      Authorization: token,
+    },
+  });
+  return res.data;
+};
+
+export default {
+  getUserDetails,
+  findUserByEmail,
+  sendRequest,
+  getIncomingRequests,
+};

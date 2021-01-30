@@ -49,9 +49,23 @@ const getIncomingRequests = async (token: string | null, toId: string) => {
   return res.data;
 };
 
+const acceptRequest = async (token: string | null, fromId: string) => {
+  const res = await axios.post(
+    API_URL + `/users/accept-request/${fromId}`,
+    {},
+    {
+      headers: {
+        Authorization: token,
+      },
+    }
+  );
+  return res.data;
+};
+
 export default {
   getUserDetails,
   findUserByEmail,
   sendRequest,
   getIncomingRequests,
+  acceptRequest,
 };

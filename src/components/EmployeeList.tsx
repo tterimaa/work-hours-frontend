@@ -21,7 +21,7 @@ const EmployeeList = () => {
         <div>
             <h1>List of my employees</h1>
             {
-                employees?.map(employee => <p>{employee.email}</p>)
+                employees?.map(employee => <p>{employee}</p>)
             }
         </div>
     )

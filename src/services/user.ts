@@ -1,5 +1,5 @@
-import { EmployeeDetails, CompanyDetails } from './../store/reducers/user.reducer';
 import axios, { AxiosResponse } from "axios";
+import { CompanyDetails, EmployeeDetails } from "../types";
 
 const API_URL = "http://localhost:3000";
 

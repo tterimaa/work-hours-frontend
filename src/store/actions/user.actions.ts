@@ -1,6 +1,6 @@
-import { EmployeeDetails, CompanyDetails } from './../reducers/user.reducer';
 import { Dispatch } from 'redux';
 import userService from "../../services/user";
+import { CompanyDetails, EmployeeDetails } from '../../types';
 
 export const userActions = {
     SET_USER: "SET_USER",

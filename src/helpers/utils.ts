@@ -1,7 +1,5 @@
-import {
-  EmployeeDetails,
-  CompanyDetails,
-} from "./../store/reducers/user.reducer";
+import { CompanyDetails, EmployeeDetails } from "../types";
+
 
 export const isCompanyState = (
   userState: EmployeeDetails | CompanyDetails

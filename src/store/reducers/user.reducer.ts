@@ -1,23 +1,5 @@
+import { CompanyDetails, EmployeeDetails } from "../../types";
 import { UserActionTypes, userActions } from "../actions/user.actions";
-
-export interface Account {
-  _id: string;
-  email: string;
-  role: string;
-}
-
-export interface CompanyDetails {
-  account: Account;
-  employees: Account[];
-  companyName: string;
-}
-
-export interface EmployeeDetails {
-  account: Account;
-  firstname?: string;
-  lastname?: string;
-  companies?: Account[];
-}
 
 export type UserState = EmployeeDetails | CompanyDetails;
 

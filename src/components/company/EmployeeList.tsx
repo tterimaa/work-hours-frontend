@@ -1,10 +1,5 @@
 import React from "react";
-
-interface Account {
-  _id: string;
-  email: string;
-  role: string;
-}
+import { Account } from "../../types";
 
 interface EmployeeListProps {
   employees?: Account[];

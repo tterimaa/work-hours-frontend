@@ -1,9 +1,10 @@
-import axios from "axios";
+import { EmployeeDetails, CompanyDetails } from './../store/reducers/user.reducer';
+import axios, { AxiosResponse } from "axios";
 
 const API_URL = "http://localhost:3000";
 
 const getUserDetails = async (token: string) => {
-  const res = await axios.get(API_URL + "/users/get-user", {
+  const res: AxiosResponse<EmployeeDetails | CompanyDetails> = await axios.get(API_URL + "/users/get-user", {
     headers: {
       Authorization: token,
     },

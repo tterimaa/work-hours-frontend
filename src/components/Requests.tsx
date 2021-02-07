@@ -31,22 +31,16 @@ interface PopulatedEmployee {
   companies: string[];
 }
 
-interface PopulatedCompany {
-  account: IAccountModel;
-  companyName: string;
-  employees: string[];
-}
-
 export const Requests = () => {
   const token = useSelector((state: RootState) => state.auth.token);
   const [found, setFound] = useState<
-    PopulatedCompany | PopulatedEmployee | null
+    PopulatedEmployee | null
   >(null);
 
   const sendRequest = async () => {
       if(found) {
-        const res = await userService.sendRequest(token, found.account._id)
-        console.log(res);
+        await userService.sendRequest(token, found.account._id)
+        setFound(null);
       }
   }
   return (

@@ -2,7 +2,12 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { CompanyDetails, EmployeeDetails } from '../store/reducers/user.reducer';
-import { IEmployee } from '../types';
+
+interface Account {
+    _id: string;
+    email: string;
+    role: string;
+  }
 
 const EmployeeList = () => {
     const isCompanyState = (userState: EmployeeDetails | CompanyDetails): userState is CompanyDetails => {
@@ -10,7 +15,7 @@ const EmployeeList = () => {
     }
 
     const employees = useSelector((state: RootState) => {
-        let employees: IEmployee[] | undefined = [];
+        let employees: Account[] = [];
         if(isCompanyState(state.user)) {
             employees = state.user.employees;
         }
@@ -21,7 +26,7 @@ const EmployeeList = () => {
         <div>
             <h1>List of my employees</h1>
             {
-                employees?.map(employee => <p>{employee}</p>)
+                employees?.map(employee => <p>{employee.email}</p>)
             }
         </div>
     )

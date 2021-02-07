@@ -1,3 +1,4 @@
+import { EmployeeDetails, CompanyDetails } from './../reducers/user.reducer';
 import { Dispatch } from 'redux';
 import userService from "../../services/user";
 
@@ -5,7 +6,7 @@ export const userActions = {
     SET_USER: "SET_USER",
 }
 
-const setUser = (payload: any) => ({type: userActions.SET_USER, payload});
+const setUser = (payload: EmployeeDetails | CompanyDetails) => ({type: userActions.SET_USER, payload});
 
 export type UserActionTypes = ReturnType<typeof setUser>;
 

@@ -1,6 +1,6 @@
 import { UserActionTypes, userActions } from "../actions/user.actions";
 
-interface Account {
+export interface Account {
   _id: string;
   email: string;
   role: string;

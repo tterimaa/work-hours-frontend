@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Button } from "semantic-ui-react";
-import userService from "../services/user";
-import { RootState } from "../store";
+import userService from "../../services/user";
+import { RootState } from "../../store";
 
 export const IncomingRequests = () => {
   const [requesters, setRequesters] = useState([]);

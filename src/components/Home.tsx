@@ -4,8 +4,8 @@ import { getUserDetails } from "../store/actions/user.actions";
 import { logOut } from "../store/actions/auth.actions"
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/index";
-import Employee from "./Employee";
-import Company from "./Company";
+import Employee from "./employee/Employee";
+import Company from "./company/Company";
 
 const Home = () => {
   const dispatch = useDispatch();

@@ -4,7 +4,7 @@ import Login from "./components/Login";
 import { Router, Route, Switch } from "react-router-dom";
 import { AuthRoute } from "./components/AuthRoute";
 import Home from "./components/Home";
-import { AuthRoutes, NonAuthRoutes } from "./random/routes-auth";
+import { AuthRoutes, NonAuthRoutes } from "./routes-auth";
 import history from "./helpers/history";
 
 const Routes = () => {

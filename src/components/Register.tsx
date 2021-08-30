@@ -6,23 +6,11 @@ import { Link } from "react-router-dom";
 import { Button, Header, Grid, Segment, Message } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 import { startRegistration } from "../store/actions/registration.actions";
+import { CompanyRegFields, EmployeeRegFields } from "../types";
 
 type role = "employee" | "company";
 
-type initialValues = Record<role, EmployeeFields | CompanyFields>;
-
-interface EmployeeFields {
-  email: string;
-  password: string;
-  firstname?: string;
-  lastname?: string;
-}
-
-interface CompanyFields {
-  email: string;
-  password: string;
-  companyName?: string;
-}
+type initialValues = Record<role, EmployeeRegFields | CompanyRegFields>;
 
 interface RegisterProps {
   userRole: role;

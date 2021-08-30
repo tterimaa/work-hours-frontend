@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { Button } from "semantic-ui-react";
 import { getUserDetails } from "../store/actions/user.actions";
 import { logOut } from "../store/actions/auth.actions"
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/index";
 import Employee from "./employee/Employee";
 import Company from "./company/Company";
+import Nav from "./Nav";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -27,9 +27,10 @@ const Home = () => {
   }
   return (
     <div>
+      <Nav></Nav>
       <h1>Home for logged in user</h1>
       {renderDashboard(role)}
-      <Button onClick={() => dispatch(logOut())}>Log out</Button>
+      <button className="bg-gray-800 hover:bg-gray-600 border-0 text-white font-bold py-2 px-4 rounded" onClick={() => dispatch(logOut())}>Log out</button>
     </div>
   );
 };

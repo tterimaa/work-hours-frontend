@@ -7,6 +7,7 @@ import { createStore, applyMiddleware, Store } from "redux";
 import thunk from "redux-thunk";
 import rootReducer, { RootState } from "./store";
 import { composeWithDevTools } from "redux-devtools-extension";
+import "./index.css";
 
 const store: Store<RootState> = createStore(
   rootReducer,

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { getUserDetails } from "../store/actions/user.actions";
-import { logOut } from "../store/actions/auth.actions"
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/index";
 import Employee from "./employee/Employee";
@@ -30,7 +29,6 @@ const Home = () => {
       <Nav></Nav>
       <h1>Home for logged in user</h1>
       {renderDashboard(role)}
-      <button className="bg-gray-800 hover:bg-gray-600 border-0 text-white font-bold py-2 px-4 rounded" onClick={() => dispatch(logOut())}>Log out</button>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
 import userService from "../../services/user";
 import { RootState } from "../../store";
-import { TextInput } from "../TextInput";
+import { TextInput } from "../common/TextInput";
 
 export type Status = 1 | 2 | 3;
 

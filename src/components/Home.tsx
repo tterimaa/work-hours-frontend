@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/index";
 import Employee from "./employee/Employee";
 import Company from "./company/Company";
-import Nav from "./Nav";
+import Nav from "./common/Nav";
 
 const Home = () => {
   const dispatch = useDispatch();

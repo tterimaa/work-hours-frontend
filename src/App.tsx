@@ -1,8 +1,8 @@
 import React from "react";
-import { Register } from "./components/Register";
-import Login from "./components/Login";
+import { Register } from "./components/login/Register";
+import Login from "./components/login/Login";
 import { Router, Route, Switch } from "react-router-dom";
-import { AuthRoute } from "./components/AuthRoute";
+import { AuthRoute } from "./components/common/AuthRoute";
 import Home from "./components/Home";
 import { AuthRoutes, NonAuthRoutes } from "./routes-auth";
 import history from "./helpers/history";

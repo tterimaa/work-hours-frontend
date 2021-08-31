@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Grid, Modal, Icon, Header } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import { NonAuthRoutes } from "../routes-auth";
+import { NonAuthRoutes } from "../../routes-auth";
 
 export const SignUpModal = () => {
   const [open, setOpen] = useState<boolean>(false);

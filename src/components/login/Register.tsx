@@ -1,12 +1,12 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { TextInput } from "./TextInput";
+import { TextInput } from "../common/TextInput";
 import { Link } from "react-router-dom";
 import { Button, Header, Grid, Segment, Message } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
-import { startRegistration } from "../store/actions/registration.actions";
-import { CompanyRegFields, EmployeeRegFields } from "../types";
+import { startRegistration } from "../../store/actions/registration.actions";
+import { CompanyRegFields, EmployeeRegFields } from "../../types";
 
 type role = "employee" | "company";
 

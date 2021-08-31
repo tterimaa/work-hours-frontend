@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { useDispatch } from "react-redux";
-import { logOut } from "../store/actions/auth.actions";
+import { logOut } from "../../store/actions/auth.actions";
 
 const Nav = () => {
   const dispatch = useDispatch();

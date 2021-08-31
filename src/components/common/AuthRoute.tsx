@@ -1,6 +1,6 @@
 import React from "react";
 import { RouteComponentProps, Route, Redirect } from "react-router-dom";
-import { NonAuthRoutes } from "../routes-auth";
+import { NonAuthRoutes } from "../../routes-auth";
 
 interface AuthRouteProps {
   Component: React.FC<RouteComponentProps>;

@@ -1,11 +1,11 @@
 import React from "react";
-import { TextInput } from "./TextInput";
+import { TextInput } from "../common/TextInput";
 import { Formik, Form } from "formik";
 import { Button, Header, Grid, Segment, Message } from "semantic-ui-react";
 import * as Yup from "yup";
 import { SignUpModal } from "./SignUpModal";
 import { useDispatch } from "react-redux";
-import { startLogIn } from "../store/actions/auth.actions";
+import { startLogIn } from "../../store/actions/auth.actions";
 
 const Login = () => {
   const dispatch = useDispatch();

@@ -1,6 +1,7 @@
-import { NonAuthRoutes } from '../../constants/routes-auth';
-import { authActions, AuthActionTypes } from './../actions/auth.actions';
-import history from '../../helpers/history';
+import { AuthRoute } from './../../components/common/AuthRoute';
+import { AuthRoutes, NonAuthRoutes } from "../../constants/routes-auth";
+import { authActions, AuthActionTypes } from "./../actions/auth.actions";
+import history from "../../helpers/history";
 
 export interface AuthState {
   loggedIn: boolean;
@@ -8,7 +9,7 @@ export interface AuthState {
   expires: string | null;
 }
 
-const auth = window.localStorage.getItem("loggedUser");
+const auth = window.localStorage.getItem("token");
 
 const initialState: AuthState = auth
   ? {
@@ -28,6 +29,9 @@ const authReducer = (
 ): AuthState => {
   switch (action.type) {
     case authActions.LOG_IN:
+      if (action.payload.token) {
+        window.localStorage.setItem("token", action.payload.token);
+      }
       return {
         ...state,
         loggedIn: true,
@@ -35,8 +39,7 @@ const authReducer = (
         expires: action.payload.expires,
       };
     case authActions.LOG_OUT:
-      window.localStorage.removeItem("loggedUser");
-      history.push(NonAuthRoutes.login);
+
       return {
         loggedIn: false,
         token: null,

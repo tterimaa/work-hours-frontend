@@ -1,37 +1,29 @@
+import { AuthRoute } from "./../components/common/AuthRoute";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "redux";
 import axios from "axios";
-import { IToken, IResponse } from "../types";
+import { IUser, LoginResponse } from "../types";
+import { API_URL } from "../constants/api";
+import { logIn, logOut } from "../store/actions/auth.actions";
+import history from "../helpers/history";
+import { AuthRoutes, NonAuthRoutes } from "../constants/routes-auth";
 
-const API_URL = "http://localhost:3000";
-
-interface IUser {
-    email: string,
-    password: string,
-}
-
-interface IEmployee extends IUser {
-  firstname?: string;
-  lastname?: string;
-}
-
-interface ICompany extends IUser {
-  companyName?: string;
-}
-
-type role = "employee" | "company";
-
-type LoginResponse = IToken & IResponse;
-
-const register = (user: IEmployee | ICompany, role: role) => {
-  return axios.post(API_URL + `/users/register-${role}`, {
-    ...user,
-    role: role,
-  });
+const requestLogIn = async (user: IUser): Promise<LoginResponse> => {
+  const response = await axios.post(API_URL + `/users/login`, user);
+  return response.data;
 };
 
-const logIn = async (user: IUser): Promise<LoginResponse> => {
-    const response = await axios.post(API_URL + `/users/login`, user);
-    localStorage.setItem("loggedUser", JSON.stringify(response.data));
-    return response.data;
+const startLogIn = async (user: IUser, dispatch: Dispatch) => {
+  const { token, expires } = await requestLogIn(user);
+  dispatch(logIn({ token, expires }));
+  history.push(AuthRoutes.home);
+};
+
+const startLogOut = async (dispatch: Dispatch) => {
+    dispatch(logOut());
+    window.localStorage.removeItem("token");
+    history.push(NonAuthRoutes.login);
 }
 
-export default { register, logIn };
+const authService = { startLogIn, startLogOut };
+export default authService;

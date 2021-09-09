@@ -4,11 +4,8 @@ import * as Yup from "yup";
 import { TextInput } from "../common/TextInput";
 import { Link } from "react-router-dom";
 import { Button, Header, Grid, Segment, Message } from "semantic-ui-react";
-import { useDispatch } from "react-redux";
-import { startRegistration } from "../../store/actions/registration.actions";
-import { CompanyRegFields, EmployeeRegFields } from "../../types";
-
-type role = "employee" | "company";
+import registrationService from "../../services/reg";
+import { CompanyRegFields, EmployeeRegFields, role } from "../../types";
 
 type initialValues = Record<role, EmployeeRegFields | CompanyRegFields>;
 
@@ -17,7 +14,6 @@ interface RegisterProps {
 }
 
 export const Register = ({ userRole }: RegisterProps) => {
-  const dispatch = useDispatch();
   const values: initialValues = {
     employee: { email: "", password: "", firstname: "", lastname: "" },
     company: {
@@ -43,7 +39,7 @@ export const Register = ({ userRole }: RegisterProps) => {
               .min(8, "Password is too short - should be 8 chars minimum."),
           })}
           onSubmit={(values, { setSubmitting }) => {
-            startRegistration(values, userRole);
+            registrationService.startRegistration(values, userRole);
             setSubmitting(false);
           }}
         >

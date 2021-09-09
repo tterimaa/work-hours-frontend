@@ -2,6 +2,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import authService from "../../services/auth";
 import { logOut } from "../../store/actions/auth.actions";
 
 const Nav = () => {
@@ -66,7 +67,7 @@ const Nav = () => {
                 </svg>
               </button>
 
-              <button className="hover:bg-gray-600 text-white font-bold py-2 px-4 rounded" onClick={() => dispatch(logOut())}>Log out</button>
+              <button className="hover:bg-gray-600 text-white font-bold py-2 px-4 rounded" onClick={() => authService.startLogOut(dispatch)}>Log out</button>
               
             </div>
           </div>

@@ -5,7 +5,8 @@ import { Button, Header, Grid, Segment, Message } from "semantic-ui-react";
 import * as Yup from "yup";
 import { SignUpModal } from "./SignUpModal";
 import { useDispatch } from "react-redux";
-import { startLogIn } from "../../store/actions/auth.actions";
+import authService from "../../services/auth";
+import { IUser } from "../../types";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -28,9 +29,8 @@ const Login = () => {
               .required("No password provided.")
               .min(8, "Password is too short - should be 8 chars minimum."),
           })}
-
-          onSubmit={(values, { setSubmitting }) => {
-            startLogIn(values);
+          onSubmit={(values: IUser, { setSubmitting }) => {
+            authService.startLogIn(values, dispatch);
             setSubmitting(false);
           }}
         >

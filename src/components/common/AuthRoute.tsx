@@ -13,7 +13,7 @@ export const AuthRoute = ({
   path,
   exact = false,
 }: AuthRouteProps): JSX.Element => {
-  const isAuthed = !!localStorage.getItem("loggedUser");
+  const isAuthed = !!localStorage.getItem("token");
   return (
     <Route
       exact={exact}

@@ -34,4 +34,4 @@ const logIn = async (user: IUser): Promise<LoginResponse> => {
     return response.data;
 }
 
-export default { register, logIn, };
+export default { register, logIn };

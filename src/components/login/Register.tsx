@@ -43,7 +43,7 @@ export const Register = ({ userRole }: RegisterProps) => {
               .min(8, "Password is too short - should be 8 chars minimum."),
           })}
           onSubmit={(values, { setSubmitting }) => {
-            dispatch(startRegistration(values, userRole));
+            startRegistration(values, userRole);
             setSubmitting(false);
           }}
         >

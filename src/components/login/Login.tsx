@@ -30,7 +30,7 @@ const Login = () => {
           })}
 
           onSubmit={(values, { setSubmitting }) => {
-            dispatch(startLogIn(values));
+            startLogIn(values);
             setSubmitting(false);
           }}
         >

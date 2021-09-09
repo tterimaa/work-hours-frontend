@@ -1,5 +1,8 @@
 export enum AuthRoutes {
-    home = '/'
+    home = '/',
+    employee = '/employee',
+    employers = '/employers',
+    dashboard = '/dashboard'
 }
 
 export enum NonAuthRoutes {

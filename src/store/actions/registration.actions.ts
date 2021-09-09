@@ -2,7 +2,7 @@ import history from './../../helpers/history';
 import { Dispatch } from "redux";
 import authService from "../../services/auth";
 import { CompanyRegFields, EmployeeRegFields } from "../../types";
-import { AuthRoutes } from '../../routes-auth';
+import { AuthRoutes } from '../../constants/routes-auth';
 
 export const regActions = {
     REG_REQ: "REGISTER_REQUEST",

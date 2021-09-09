@@ -1,7 +1,7 @@
 import authService from "../../services/auth";
 import { IToken } from "../../types";
 import history from "../../helpers/history";
-import { AuthRoutes } from "../../routes-auth";
+import { AuthRoutes } from "../../constants/routes-auth";
 
 export const authActions = {
   LOG_IN: "LOG_IN",

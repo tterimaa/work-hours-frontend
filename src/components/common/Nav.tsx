@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { logOut } from "../../store/actions/auth.actions";
 
 const Nav = () => {
@@ -25,20 +26,20 @@ const Nav = () => {
               </div>
               <div className="hidden sm:block sm:ml-6">
                 <div className="flex space-x-4">
-                  <a
-                    href="#"
+                  <Link
+                    to="/dashboard"
                     className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
                     aria-current="page"
                   >
                     Dashboard
-                  </a>
+                  </Link>
 
-                  <a
-                    href="#"
+                  <Link
+                    to="/employers"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    Team
-                  </a>
+                    Employers
+                  </Link>
                 </div>
               </div>
             </div>

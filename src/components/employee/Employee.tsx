@@ -1,24 +1,26 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { isEmployeeState } from '../../helpers/utils'
-import { RootState } from '../../store'
-import CompanyList from './CompanyList'
-import { IncomingRequests } from './IncomingRequests'
+import React from "react";
+import { useSelector } from "react-redux";
+import { Redirect, RouteComponentProps, Switch } from "react-router-dom";
+import { isEmployeeState } from "../../helpers/utils";
+import { AuthRoutes } from "../../constants/routes-auth";
+import { RootState } from "../../store";
+import { AuthRoute } from "../common/AuthRoute";
+import Nav from "../common/Nav";
+import CompanyList from "./CompanyList";
+import Dashboard from "./Dashboard";
+import Employers from "./Employers";
 
-export const Employee = () => {
-    const companies = useSelector((state: RootState) => {
-        if(isEmployeeState(state.user)) {
-            return state.user.companies;
-        }
-    })
-    
-    return (
-        <div>
-            This is the home page for employee
-            <IncomingRequests />
-            <CompanyList companies={companies} />
-        </div>
-    )
-}
+const Employee = () => {
+  return (
+    <>
+      <Nav></Nav>
+      <Switch>
+        <AuthRoute path={AuthRoutes.dashboard} Component={Dashboard}></AuthRoute>
+        <AuthRoute path={AuthRoutes.employers} Component={Employers}></AuthRoute>
+      </Switch>
+      <Redirect to={AuthRoutes.dashboard} />
+    </>
+  );
+};
 
 export default Employee;

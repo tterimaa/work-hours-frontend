@@ -34,9 +34,4 @@ const logIn = async (user: IUser): Promise<LoginResponse> => {
     return response.data;
 }
 
-const logOut = () => {
-    window.localStorage.removeItem("loggedUser");
-    window.location.reload();
-}
-
-export default { register, logIn, logOut };
+export default { register, logIn, };

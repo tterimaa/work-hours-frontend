@@ -1,4 +1,6 @@
+import { NonAuthRoutes } from '../../constants/routes-auth';
 import { authActions, AuthActionTypes } from './../actions/auth.actions';
+import history from '../../helpers/history';
 
 export interface AuthState {
   loggedIn: boolean;
@@ -33,7 +35,8 @@ const authReducer = (
         expires: action.payload.expires,
       };
     case authActions.LOG_OUT:
-      localStorage.clear();
+      window.localStorage.removeItem("loggedUser");
+      history.push(NonAuthRoutes.login);
       return {
         loggedIn: false,
         token: null,

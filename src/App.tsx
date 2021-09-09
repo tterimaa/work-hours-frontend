@@ -16,6 +16,7 @@ const Routes = () => {
   const dispatch = useDispatch();
   const role = useSelector((state: RootState) => state.user.account.role);
   const token = useSelector((state: RootState) => state.auth.token);
+  const isLoggedIn = useSelector((state: RootState) => state.auth.loggedIn);
 
   useEffect(() => {
     if (token) dispatch(getUserDetails(token)); // token to request by axios middleware
@@ -28,7 +29,7 @@ const Routes = () => {
       case Roles.EMPLOYER:
         return <AuthRoute path={AuthRoutes.home} Component={Company} />;
       default:
-        return <></>;
+        console.error(`Internal error: there is no role ${role} in the system`);
     }
   };
   return (
@@ -44,7 +45,7 @@ const Routes = () => {
         path={NonAuthRoutes.signUpEmployee}
         render={() => <Register userRole={Roles.EMPLOYEE} />}
       />
-      {getDashboardRoute(role)}
+      {isLoggedIn ? getDashboardRoute(role) : <Redirect to={NonAuthRoutes.login} />}
     </Switch>
   );
 };

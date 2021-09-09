@@ -14,7 +14,7 @@ const register = (user: IEmployee | ICompany, role: role) => {
   });
 };
 
-const startRegistration = (user: EmployeeRegFields | CompanyRegFields, role: Roles.EMPLOYEE | Roles.EMPLOYER) => async (dispatch: Dispatch) => {
+const startRegistration = async (user: EmployeeRegFields | CompanyRegFields, role: Roles.EMPLOYEE | Roles.EMPLOYER, dispatch: Dispatch) => {
   dispatch(registrationStarted());
   try {
       await register(user, role);

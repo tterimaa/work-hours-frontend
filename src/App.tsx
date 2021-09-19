@@ -6,7 +6,7 @@ import { AuthRoute } from "./components/common/AuthRoute";
 import { Register } from "./components/login/Register";
 import Login from "./components/login/Login";
 import { Roles } from "./constants/roles";
-import Home from "./components/Home";
+import Home from "./components/common/Home";
 
 const Routes = () => {
   return (

@@ -14,7 +14,7 @@ const Company = () => {
 
     return (
         <div>
-            This is the home page for company
+            This is the home page for company. In progress..
             <Requests />
             <EmployeeList employees={employees} />
         </div>

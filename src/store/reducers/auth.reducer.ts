@@ -30,7 +30,7 @@ const authReducer = (
   switch (action.type) {
     case authActions.LOG_IN:
       if (action.payload.token) {
-        window.localStorage.setItem("token", action.payload.token);
+        window.localStorage.setItem("token", JSON.stringify(action.payload));
       }
       return {
         ...state,
